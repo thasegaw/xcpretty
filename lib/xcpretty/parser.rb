@@ -434,22 +434,22 @@ module XCPretty
       when TEST_CASE_STARTED_MATCHER
         @test_suite = $1
         @test_case = $2
-        @capture = []
-        @start_capture = true
+        @captures = []
+        @capture_enabled = true
       when TESTS_RUN_COMPLETION_MATCHER
         @tests_done = true
-        @start_capture = false
+        @capture_enabled = false
       when FAILING_TEST_MATCHER
         store_failure(file: $1, test_suite: $2, test_case: $3, reason: $4)
-        @start_capture = false
+        @capture_enabled = false
       when CRASH_TEST_MATCHER
         store_failure(test_suite: $2, test_case: $3, reason: $1)
-        @start_capture = false
+        @capture_enabled = false
       when UI_FAILING_TEST_MATCHER
         store_failure(file: $1, test_suite: @test_suite, test_case: @test_case, reason: $2)
-        @start_capture = false
+        @capture_enabled = false
       else
-        @capture << text.chomp if @start_capture
+        @captures << text.chomp if @capture_enabled
       end
     end
 
