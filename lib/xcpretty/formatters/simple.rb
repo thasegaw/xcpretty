@@ -83,6 +83,10 @@ module XCPretty
       INDENT + format_test("#{test_case}, #{reason}", :fail)
     end
 
+    def format_error_test(suite, test_case, reason, stack_trace)
+      INDENT + format_test("#{test_case}, #{reason}", :error)
+    end
+
     def format_passing_test(suite, test_case, time)
       INDENT + format_test("#{test_case} (#{colored_time(time)} seconds)",
                            :pass)
