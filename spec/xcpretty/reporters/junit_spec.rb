@@ -14,7 +14,7 @@ module XCPretty
       @formatter.format_test_run_started(test_name)
       @formatter.finish
       document = REXML::Document.new(@reporter_file)
-      expect(document.root.attributes['name']).to eq(test_name)
+      document.root.attributes['name'].should == test_name
     end
 
     describe '#write_report' do
@@ -32,6 +32,14 @@ module XCPretty
         @formatter.instance_variable_set(:@document, doc)
       end
 
+      context "when --pretty-report is not set" do
+        let(:option) { {path: @reporter_file.path} }
+        it "return pretty xml" do
+          @formatter.write_report
+          expect(result_xml).to eq(SAMPLE_JUNIT_PRETTY_XML)
+        end
+      end
+
       context "when --pretty-report is set" do
         let(:option) { {path: @reporter_file.path, pretty_report: true} }
         it "return pretty xml" do
@@ -42,7 +50,7 @@ module XCPretty
 
       context "when --no-pretty-report is set" do
         let(:option) { {path: @reporter_file.path, pretty_report: false} }
-        it "return normal xml" do
+        it "return no pretty xml" do
           @formatter.write_report
           expect(result_xml).to eq(SAMPLE_JUNIT_XML)
         end

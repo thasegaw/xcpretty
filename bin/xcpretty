@@ -54,7 +54,7 @@ OptionParser.new do |opts|
     else
       report_classes << XCPretty.load_custom_class(format)
     end
-    report_options << {pretty_report: true}
+    report_options << {}
   end
   opts.on('-o', '--output PATH', 'Write report output to PATH') do |path|
     unless opts = report_options.last
@@ -68,7 +68,7 @@ OptionParser.new do |opts|
     end
     opts[:screenshots] = true
   end
-  opts.on('--[no-]pretty-report', 'Collect screenshots in the HTML report') do |value|
+  opts.on('--[no-]pretty-report', 'Use pretty report. Default is pretty.(only available junit reporter)') do |value|
     opts[:pretty_report] = value
   end
   opts.on_tail('-h', '--help', 'Show this message') { puts opts; exit }

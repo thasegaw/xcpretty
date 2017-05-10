@@ -21,7 +21,7 @@ module XCPretty
       @document.add_element('testsuites')
       @total_fails = 0
       @total_tests = 0
-      @pretty = options[:pretty_report]
+      @pretty = options[:pretty_report].nil? ? true : options[:pretty_report]
     end
 
     def handle(line)
