@@ -361,7 +361,7 @@ module XCPretty
       when FAILING_TEST_MATCHER
         formatter.format_failing_test($2, $3, $4, $1)
       when CRASH_TEST_MATCHER
-        formatter.format_error_test($2, $3, $1, @capture.join("\n"))
+        formatter.format_error_test($2, $3, $1, @logs.join("\n"))
       when FATAL_ERROR_MATCHER
         formatter.format_error($1)
       when FILE_MISSING_ERROR_MATCHER
@@ -434,7 +434,7 @@ module XCPretty
       when TEST_CASE_STARTED_MATCHER
         @test_suite = $1
         @test_case = $2
-        @captures = []
+        @logs = []
         @capture_enabled = true
       when TESTS_RUN_COMPLETION_MATCHER
         @tests_done = true
@@ -449,7 +449,7 @@ module XCPretty
         store_failure(file: $1, test_suite: @test_suite, test_case: @test_case, reason: $2)
         @capture_enabled = false
       else
-        @captures << text.chomp if @capture_enabled
+        @logs << text.chomp if @capture_enabled
       end
     end
 
