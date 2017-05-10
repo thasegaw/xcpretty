@@ -7,12 +7,14 @@ module XCPretty
 
     PASS = "✓"
     FAIL = "✗"
+    ERROR = "✗"
     PENDING = "⧖"
     COMPLETION = "▸"
     MEASURE = '◷'
 
     ASCII_PASS = "."
     ASCII_FAIL = "x"
+    ASCII_ERROR = "x"
     ASCII_PENDING = "P"
     ASCII_COMPLETION = ">"
     ASCII_MEASURE = 'T'
