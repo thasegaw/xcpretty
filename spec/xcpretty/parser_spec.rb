@@ -210,7 +210,7 @@ module XCPretty
 
     it "parses passing ocunit tests" do
       @formatter.should receive(:format_passing_test).with('RACCommandSpec',
-                                                           'enabled_signal_should_send_YES_while_executing_is_YES_and_allowsConcurrentExecution_is_YES',
+                                                           'enabled_signal_should_send_YES_while_executing_is_YES',
                                                            '0.001')
       @parser.parse(SAMPLE_OCUNIT_TEST)
     end
@@ -531,6 +531,13 @@ module XCPretty
       it "parses code signing is required error" do
         @formatter.should receive(:format_error)
         @parser.parse(SAMPLE_CODE_SIGNING_IS_REQUIRED_ERROR)
+      end
+
+      it "parses module includes error" do
+        @formatter.should receive(:format_error).with(
+          "error: umbrella header for module 'ModuleName' does not include header 'Header.h'"
+        )
+        @parser.parse(SAMPLE_MODULE_INCLUDES_ERROR)
       end
     end
 
