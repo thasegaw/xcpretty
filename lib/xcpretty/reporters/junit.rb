@@ -82,7 +82,7 @@ module XCPretty
         formatter = REXML::Formatters::Pretty.new(2)
         formatter.compact = true
       else
-        formatter = REXML::Formatters::Default.new()
+        formatter = REXML::Formatters::Default.new
       end
       output_file = File.open(@filepath, 'w+')
       result = formatter.write(@document, output_file)
